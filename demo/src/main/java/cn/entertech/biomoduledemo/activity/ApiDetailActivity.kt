@@ -5,8 +5,8 @@ import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
-import cn.entertech.affective.sdk.bean.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
 import cn.entertech.affectivecloudsdk.AffectiveSubscribeParams
 import cn.entertech.affectivecloudsdk.BiodataSubscribeParams
 import cn.entertech.affectivecloudsdk.EnterAffectiveCloudApiFactory
@@ -41,7 +41,7 @@ class ApiDetailActivity : AppCompatActivity() {
     var saveHRPath: String =
         Environment.getExternalStorageDirectory().path + File.separator + "biorawdata" + File.separator + "hr" + File.separator
     var fileName: String = ""
-    var availableAffectiveDataCategories = listOf(AffectiveDataCategory.ATTENTION, AffectiveDataCategory.PRESSURE, AffectiveDataCategory.AROUSAL, AffectiveDataCategory.SLEEP)
+    var availableAffectiveDataCategories = listOf(PhysiologyDataCategory.ATTENTION, PhysiologyDataCategory.PRESSURE, PhysiologyDataCategory.AROUSAL, PhysiologyDataCategory.SLEEP)
     var availableBioDataCategories = listOf(BioDataCategory.EEG, BioDataCategory.HR)
     var websocketAddress = "wss://server.affectivecloud.cn/ws/algorithm/v1/"
     override fun onCreate(savedInstanceState: Bundle?) {
