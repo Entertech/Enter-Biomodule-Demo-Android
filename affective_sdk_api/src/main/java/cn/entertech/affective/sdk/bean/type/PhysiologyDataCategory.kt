@@ -1,12 +1,11 @@
-package cn.entertech.affective.sdk.bean
+package cn.entertech.affective.sdk.bean.type
 
 import com.google.gson.annotations.SerializedName
 
-enum class AffectiveDataCategory(
+enum class PhysiologyDataCategory(
     @SerializedName("value")
     var value: String
-) {
-    DCEEG_SSVEP("dceeg-ssvep"),
+) :IDataType{
     SSVEP_MULTI_CLASSIFY("ssvep-multi-classify"),
     ATTENTION("attention"), RELAXATION("relaxation"),
     PRESSURE("pressure"), PLEASURE("pleasure"),

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import androidx.core.app.ActivityCompat
 import android.util.Log
 import android.view.View
@@ -21,9 +20,9 @@ import cn.entertech.affective.sdk.api.IConnectionServiceListener
 import cn.entertech.affective.sdk.api.IFinishAffectiveServiceListener
 import cn.entertech.affective.sdk.api.IGetReportListener
 import cn.entertech.affective.sdk.api.IStartAffectiveServiceLister
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affective.sdk.bean.AffectiveServiceWay
-import cn.entertech.affective.sdk.bean.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
 import cn.entertech.affective.sdk.bean.EnterAffectiveConfigProxy
 import cn.entertech.affective.sdk.bean.Error
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
@@ -44,7 +43,6 @@ import java.io.*
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
     private var appSecret: String? = null
@@ -67,14 +65,14 @@ class MainActivity : AppCompatActivity() {
     }
     private var availableAffectiveDataCategories =
         listOf(
-            AffectiveDataCategory.ATTENTION,
-            AffectiveDataCategory.PRESSURE,
-            AffectiveDataCategory.AROUSAL,
-            AffectiveDataCategory.RELAXATION,
-            AffectiveDataCategory.PLEASURE,
-            AffectiveDataCategory.SLEEP,
-            AffectiveDataCategory.COHERENCE,
-            AffectiveDataCategory.FLOW
+            PhysiologyDataCategory.ATTENTION,
+            PhysiologyDataCategory.PRESSURE,
+            PhysiologyDataCategory.AROUSAL,
+            PhysiologyDataCategory.RELAXATION,
+            PhysiologyDataCategory.PLEASURE,
+            PhysiologyDataCategory.SLEEP,
+            PhysiologyDataCategory.COHERENCE,
+            PhysiologyDataCategory.FLOW
         )
     private var availableBioDataCategories = listOf(BioDataCategory.EEG, BioDataCategory.HR)
 
