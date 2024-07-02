@@ -122,6 +122,38 @@ data class Sleep(
      */
     @SerializedName("rem_duration")
     var remDuration: Int = 0,
+
+    @SerializedName("sleep_spindle")
+    var sleepSpindle: Float = 0f,
+
+    @SerializedName("sleep_spindle_rec")
+    var sleepSpindleRec: List<Double> = ArrayList(),
+
+
+    @SerializedName("sleep_movement")
+    var sleepMovement: Float = 0f,
+
+    @SerializedName("sleep_movement_rec")
+    var sleepMovementRec: List<Double> = ArrayList(),
+
+    @SerializedName("temperature")
+    var temperature: Float = 0f,
+
+    @SerializedName("temperature_rec")
+    var temperatureRec: List<Double> = ArrayList(),
+
+    @SerializedName("hrv_score")
+    var hrvScore:Int=0,
+
+    @SerializedName("sleep_stage")
+    var sleepStage:Int=0,
+
+    @SerializedName("sleep_position")
+    var sleepPosition:Int=0,
+
+    var score:Int=0,
+
+
     /**
      * 运动次数
      */
@@ -150,9 +182,6 @@ data class Sleep(
         ArrayList(),
 
     val sleepEegQualityRec: List<Int> =
-        ArrayList(),
-
-    val sleepMovementRec: List<Int> =
         ArrayList(),
 
     val sleepArousalRec: List<Int> = ArrayList()
