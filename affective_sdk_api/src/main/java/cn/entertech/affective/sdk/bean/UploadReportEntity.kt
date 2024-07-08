@@ -60,8 +60,24 @@ data class Biodata(
     val eeg: Eeg? = null,
     @SerializedName("hr-v2")
     val hr: HrV2? = null,
-    val pepr: PEPR?
+    @SerializedName("hr")
+    val hrData: HrData? = null,
+    val pepr: PEPR? = null,
+    val tag: TagData? = null
 ) : Serializable
+
+data class TagData(
+    val hr_avg: Int = 0,
+    val hr_max: Int = Int.MIN_VALUE,
+    val hr_min: Int = Int.MAX_VALUE,
+    val hr_rec: List<Int> = emptyList(),
+    val hrv_avg: Double = 0.0,
+    val hrv_rec: List<Double> = emptyList(),
+    val rr_avg: Double = 0.0,
+    val rr_rec: List<Double> = emptyList(),
+    val rri_quality_rec: List<Int> = emptyList(),
+) : Serializable
+
 
 data class PEPR(
     @SerializedName("hr_avg")
@@ -88,71 +104,75 @@ data class PEPR(
 
 data class Sleep(
     /**
-     * 睡眠曲线，反映整个体验过程的睡眠情况。睡眠曲线的值越高表明越接近清醒，曲线值越低表明越接近深睡。
-     * */
-    @SerializedName("sleep_curve")
-    val sleepCurve: ArrayList<Double> = ArrayList(),
-    /**
-     * 入睡点时间索引,即入睡时刻在睡眠曲线上的时间轴坐标。数值范围[0, +∞),0表示无效值
-     * */
-    @SerializedName("sleep_point")
-    val sleepPoint: Int = 0,
-    /**
-     * 入睡用时，单位：秒
-     * */
-    @SerializedName("sleep_latency")
-    val sleepLatency: Int = 0,
-    /**
      * 清醒时长，单位：秒
      * */
     @SerializedName("awake_duration")
     val awakeDuration: Int = 0,
-    /**
-     * 浅睡时长，单位：秒
-     * */
-    @SerializedName("light_duration")
-    val lightDuration: Int = 0,
+
     /**
      * 深睡时长，单位：秒
      * */
     @SerializedName("deep_duration")
     val deepDuration: Int = 0,
+
+    @SerializedName("hrv_score")
+    var hrvScore: Double = 0.0,
+
+    /**
+     * 浅睡时长，单位：秒
+     * */
+    @SerializedName("light_duration")
+    val lightDuration: Int = 0,
+
     /**
      * 快速眼动时长
      */
     @SerializedName("rem_duration")
     var remDuration: Int = 0,
 
+    /**
+     * 睡眠曲线，反映整个体验过程的睡眠情况。睡眠曲线的值越高表明越接近清醒，曲线值越低表明越接近深睡。
+     * */
+    @SerializedName("sleep_curve")
+    val sleepCurve: ArrayList<Double> = ArrayList(),
+
+    /**
+     * 入睡用时，单位：秒
+     * */
+    @SerializedName("sleep_latency")
+    val sleepLatency: Int = 0,
+
+    var score: Double = 0.0,
+
+    @SerializedName("sleep_movement")
+    var sleepMovement: Double = 0.0,
+    @SerializedName("sleep_movement_rec")
+    var sleepMovementRec: List<Double> = ArrayList(),
+
+    /**
+     * 入睡点时间索引,即入睡时刻在睡眠曲线上的时间轴坐标。数值范围[0, +∞),0表示无效值
+     * */
+    @SerializedName("sleep_point")
+    val sleepPoint: Int = 0,
+
+    @SerializedName("sleep_position")
+    var sleepPosition: List<Int> = emptyList(),
+
+
     @SerializedName("sleep_spindle")
-    var sleepSpindle: Float = 0f,
+    var sleepSpindle: Double = 0.0,
 
     @SerializedName("sleep_spindle_rec")
     var sleepSpindleRec: List<Double> = ArrayList(),
 
-
-    @SerializedName("sleep_movement")
-    var sleepMovement: Float = 0f,
-
-    @SerializedName("sleep_movement_rec")
-    var sleepMovementRec: List<Double> = ArrayList(),
+    @SerializedName("sleep_stage")
+    var sleepStage: List<Int> = emptyList(),
 
     @SerializedName("temperature")
-    var temperature: Float = 0f,
+    var temperature: Double = 0.0,
 
     @SerializedName("temperature_rec")
     var temperatureRec: List<Double> = ArrayList(),
-
-    @SerializedName("hrv_score")
-    var hrvScore:Int=0,
-
-    @SerializedName("sleep_stage")
-    var sleepStage:Int=0,
-
-    @SerializedName("sleep_position")
-    var sleepPosition:Int=0,
-
-    var score:Int=0,
-
 
     /**
      * 运动次数
@@ -313,6 +333,21 @@ data class Eeg(
     val eegThetaCurve: List<Double> = ArrayList(),
     @SerializedName("eeg_quality_rec")
     val eegQualityRec: List<Int> = ArrayList()
+) : Serializable
+
+data class HrData(
+    @SerializedName("hr_avg")
+    val hrAvg: Int? = null,
+    @SerializedName("hr_max")
+    val hrMax: Int? = null,
+    @SerializedName("hr_min")
+    val hrMin: Int? = null,
+    @SerializedName("hr_rec")
+    val hrRec: List<Int> = ArrayList(),
+    @SerializedName("hrv_avg")
+    val hrvAvg: Double? = null,
+    @SerializedName("hrv_rec")
+    val hrvRec: List<Double> = ArrayList()
 ) : Serializable
 
 data class HrV2(
