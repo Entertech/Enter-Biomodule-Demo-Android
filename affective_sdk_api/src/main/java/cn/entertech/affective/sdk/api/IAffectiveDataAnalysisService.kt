@@ -5,9 +5,9 @@ import cn.entertech.affective.sdk.bean.AffectiveServiceWay
 import cn.entertech.affective.sdk.bean.EnterAffectiveConfigProxy
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
 import cn.entertech.affective.sdk.bean.RealtimeBioData
+import cn.entertech.ble.api.bean.MeditateDataType
 import java.io.InputStream
 import java.util.ServiceLoader
-
 
 
 /**
@@ -141,6 +141,7 @@ interface IAffectiveDataAnalysisService {
     /**
      * 发送数据
      * */
+    fun appendData(dataType: MeditateDataType, data:ByteArray)
 
     fun appendEEGData(brainData: ByteArray)
     fun appendEEGData(brainData: Int)
