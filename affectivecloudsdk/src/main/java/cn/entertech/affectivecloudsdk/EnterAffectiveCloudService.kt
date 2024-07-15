@@ -15,9 +15,14 @@ import cn.entertech.affective.sdk.bean.RealtimeBioData
 import java.util.HashMap
 import cn.entertech.affective.sdk.bean.Error
 import cn.entertech.affective.sdk.utils.AffectiveLogHelper
+import cn.entertech.ble.api.bean.MeditateDataType
 import com.google.auto.service.AutoService
 import java.io.InputStream
 
+/**
+ * 同一个useid 不能频繁创建连接
+ * 15之内未触发append方法，也就是15之内未收到源消息；或者15s之内未收到情感云数据，需要断开重连
+ * */
 @AutoService(IAffectiveDataAnalysisService::class)
 class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
 
@@ -95,6 +100,25 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
         }
     }
 
+    override fun appendData(dataType: MeditateDataType, data: ByteArray) {
+        when (dataType) {
+            MeditateDataType.EEG -> {
+                appendEEGData(data)
+            }
+
+            MeditateDataType.SCEEG -> {
+                appendSCEEGData(data)
+            }
+
+            MeditateDataType.PEPR -> {
+                appendPEPRData(data)
+            }
+
+            else -> {
+                throw IllegalAccessError("not support this type $dataType")
+            }
+        }
+    }
 
     override fun <R> readFileAnalysisData(
         inputStream: InputStream,
@@ -239,6 +263,11 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
 
         })
     }
+
+    override fun isGoodQuality(quality: Double): Boolean {
+        return quality >= 2
+    }
+
 
     override fun getAffectiveWay() = AffectiveServiceWay.AffectiveCloudService
 }
