@@ -4,11 +4,11 @@ import cn.entertech.affective.sdk.api.Callback
 import cn.entertech.affective.sdk.api.Callback2
 import cn.entertech.affective.sdk.api.IAffectiveDataAnalysisService.Companion.UPLOAD_BCG_PACKAGE_COUNT
 import cn.entertech.affective.sdk.api.IAffectiveDataAnalysisService.Companion.UPLOAD_GYRO_PACKAGE_COUNT
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
-import cn.entertech.affective.sdk.bean.BioDataCategory
 import cn.entertech.affective.sdk.bean.Error
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
 import cn.entertech.affective.sdk.bean.RealtimeBioData
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affective.sdk.utils.AffectiveLogHelper
 import cn.entertech.affectivecloudsdk.entity.*
 import cn.entertech.affectivecloudsdk.interfaces.*
@@ -45,7 +45,7 @@ class EnterAffectiveCloudApiImpl internal constructor(
     private var mCreateSessionCallback: Callback2<String>? = null
     private var mSubscribeAffectiveData: List<Any>? = null
     private var mSubscribeBioData: List<Any>? = null
-    private var mStartedAffectiveDataCategories: List<AffectiveDataCategory>? = null
+    private var mStartedAffectiveDataCategories: List<PhysiologyDataCategory>? = null
     private var mSign: String? = null
 
     /*service type：session、biodata、affective*/
@@ -379,7 +379,7 @@ class EnterAffectiveCloudApiImpl internal constructor(
     }
 
 
-    override fun initAffectiveDataServices(bioOrAffectiveDataCategories: List<AffectiveDataCategory>, callback: Callback) {
+    override fun initAffectiveDataServices(bioOrAffectiveDataCategories: List<PhysiologyDataCategory>, callback: Callback) {
         this.mAffectiveStartCallback = callback
         this.mStartedAffectiveDataCategories = bioOrAffectiveDataCategories
         var requestBodyMap = HashMap<Any, Any>()
@@ -573,7 +573,7 @@ class EnterAffectiveCloudApiImpl internal constructor(
     }
 
     override fun getAffectivedataReport(
-        affectiveDataCategories: List<AffectiveDataCategory>,
+        affectiveDataCategories: List<PhysiologyDataCategory>,
         callback: Callback2<HashMap<Any, Any?>>
     ) {
 
@@ -619,7 +619,7 @@ class EnterAffectiveCloudApiImpl internal constructor(
         mWebSocketHelper?.sendMessage(requestJson)
     }
 
-    override fun finishAffectiveDataServices(affectiveDataCategories: List<AffectiveDataCategory>, callback: Callback) {
+    override fun finishAffectiveDataServices(affectiveDataCategories: List<PhysiologyDataCategory>, callback: Callback) {
         this.mAffectiveFinishCallback = callback
         if (mStartedAffectiveDataCategories == null) {
             throw IllegalStateException(

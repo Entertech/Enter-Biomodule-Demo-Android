@@ -2,10 +2,10 @@ package cn.entertech.affectivecloudsdk.interfaces
 
 import cn.entertech.affective.sdk.api.Callback
 import cn.entertech.affective.sdk.api.Callback2
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
-import cn.entertech.affective.sdk.bean.BioDataCategory
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
 import cn.entertech.affective.sdk.bean.RealtimeBioData
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affectivecloudsdk.entity.*
 
 /**
@@ -86,7 +86,7 @@ interface BaseApi {
      * @param bioOrAffectiveDataCategories List<String>
      * @param callback Callback
      */
-    fun initAffectiveDataServices(bioOrAffectiveDataCategories: List<AffectiveDataCategory>, callback: Callback)
+    fun initAffectiveDataServices(bioOrAffectiveDataCategories: List<PhysiologyDataCategory>, callback: Callback)
 
     /**
      * Send brain data to affective cloud platform.
@@ -169,7 +169,7 @@ interface BaseApi {
      * @param affectiveDataCategories List<String>
      * @param callback Callback2<HashMap<Any, Any?>>
      */
-    fun getAffectivedataReport(affectiveDataCategories: List<AffectiveDataCategory>, callback: Callback2<HashMap<Any, Any?>>)
+    fun getAffectivedataReport(affectiveDataCategories: List<PhysiologyDataCategory>, callback: Callback2<HashMap<Any, Any?>>)
 
     /**
      * Unsubscribe biodata.
@@ -194,7 +194,7 @@ interface BaseApi {
      * @param affectiveDataCategories List<String>
      * @param callback Callback
      */
-    fun finishAffectiveDataServices(affectiveDataCategories: List<AffectiveDataCategory>, callback: Callback)
+    fun finishAffectiveDataServices(affectiveDataCategories: List<PhysiologyDataCategory>, callback: Callback)
 
     /**
      * Finish all affective services started before.

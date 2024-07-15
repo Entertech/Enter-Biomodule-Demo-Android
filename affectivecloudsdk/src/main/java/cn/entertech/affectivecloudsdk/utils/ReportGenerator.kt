@@ -1,13 +1,13 @@
 package cn.entertech.affectivecloudsdk.utils
 
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
-import cn.entertech.affective.sdk.bean.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affectivecloudsdk.entity.ResponseBody
 import java.lang.IllegalStateException
 
 class ReportGenerator {
     private var reportBioDataCategoryList: List<BioDataCategory>? = null
-    private var reportAffectiveDataCategoryList: List<AffectiveDataCategory>? = null
+    private var reportAffectiveDataCategoryList: List<PhysiologyDataCategory>? = null
     private val affectiveItem = HashMap<Any, Any?>()
     private val item = HashMap<Any, Any?>()
     private val affectiveItemSet = HashSet<String>()
@@ -16,7 +16,7 @@ class ReportGenerator {
         this.reportBioDataCategoryList = bioDataCategories
     }
 
-    fun setAffectiveDataCategories(affectiveDataCategories: List<AffectiveDataCategory>) {
+    fun setAffectiveDataCategories(affectiveDataCategories: List<PhysiologyDataCategory>) {
         this.reportAffectiveDataCategoryList = affectiveDataCategories
         affectiveDataCategories.forEach {
             affectiveItemSet.add(it.value)

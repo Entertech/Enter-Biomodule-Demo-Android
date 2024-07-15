@@ -1,8 +1,8 @@
 package cn.entertech.affectivecloudsdk
 
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
-import cn.entertech.affective.sdk.bean.BioDataCategory
 import cn.entertech.affective.sdk.bean.EnterAffectiveConfigProxy
+import cn.entertech.affective.sdk.bean.type.BioDataCategory
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affectivecloudsdk.EnterAffectiveCloudApiImpl.Companion.DEFAULT_UPLOAD_CYCLE
 import java.lang.IllegalStateException
 
@@ -15,7 +15,7 @@ class EnterAffectiveCloudConfig internal constructor(builder: Builder) {
     var uri: String? = null
     var websocketTimeout: Int? = null
     var availableBioDataCategories: List<BioDataCategory>? = null
-    var availableAffectiveDataCategories: List<AffectiveDataCategory>? = null
+    var availableAffectiveDataCategories: List<PhysiologyDataCategory>? = null
     var storageSettings: StorageSettings? = null
     var algorithmParams: AlgorithmParams? = null
     var biodataTolerance: BiodataTolerance? = null
@@ -33,27 +33,27 @@ class EnterAffectiveCloudConfig internal constructor(builder: Builder) {
             val storageSettingsBuild = StorageSettings.Builder()
             availableAffectiveServices.forEach {
                 when (it) {
-                    AffectiveDataCategory.ATTENTION -> {
+                    PhysiologyDataCategory.ATTENTION -> {
                         affectiveSubscribeParamsBuilder.requestAttention()
                     }
 
-                    AffectiveDataCategory.PRESSURE -> {
+                    PhysiologyDataCategory.PRESSURE -> {
                         affectiveSubscribeParamsBuilder.requestPressure()
                     }
 
-                    AffectiveDataCategory.RELAXATION -> {
+                    PhysiologyDataCategory.RELAXATION -> {
                         affectiveSubscribeParamsBuilder.requestRelaxation()
                     }
 
-                    AffectiveDataCategory.PLEASURE -> {
+                    PhysiologyDataCategory.PLEASURE -> {
                         affectiveSubscribeParamsBuilder.requestPleasure()
                     }
 
-                    AffectiveDataCategory.COHERENCE -> {
+                    PhysiologyDataCategory.COHERENCE -> {
                         affectiveSubscribeParamsBuilder.requestCoherence()
                     }
 
-                    AffectiveDataCategory.FLOW -> {
+                    PhysiologyDataCategory.FLOW -> {
                         affectiveSubscribeParamsBuilder.requestFlow()
                     }
 
@@ -146,7 +146,7 @@ class EnterAffectiveCloudConfig internal constructor(builder: Builder) {
         var uri: String? = null
         var websocketTimeout: Int? = null
         var availableBioDataCategories: List<BioDataCategory>? = null
-        var availableAffectiveDataCategories: List<AffectiveDataCategory>? = null
+        var availableAffectiveDataCategories: List<PhysiologyDataCategory>? = null
         var biodataTolerance: BiodataTolerance? = null
         var uploadCycle = DEFAULT_UPLOAD_CYCLE
         fun url(url: String): Builder {
@@ -170,7 +170,7 @@ class EnterAffectiveCloudConfig internal constructor(builder: Builder) {
         }
 
 
-        fun availableAffectiveServices(bioOrAffectiveDataCategories: List<AffectiveDataCategory>?): Builder {
+        fun availableAffectiveServices(bioOrAffectiveDataCategories: List<PhysiologyDataCategory>?): Builder {
             this.availableAffectiveDataCategories = bioOrAffectiveDataCategories
             return this
         }

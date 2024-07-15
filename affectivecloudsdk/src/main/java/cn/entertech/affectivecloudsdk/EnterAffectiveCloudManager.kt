@@ -5,10 +5,10 @@ import cn.entertech.affective.sdk.api.Callback2
 import cn.entertech.affective.sdk.api.IConnectionServiceListener
 import cn.entertech.affective.sdk.api.IFinishAffectiveServiceListener
 import cn.entertech.affective.sdk.api.IStartAffectiveServiceLister
-import cn.entertech.affective.sdk.bean.AffectiveDataCategory
 import cn.entertech.affective.sdk.bean.Error
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
 import cn.entertech.affective.sdk.bean.RealtimeBioData
+import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 import cn.entertech.affective.sdk.utils.AffectiveLogHelper
 import cn.entertech.affectivecloudsdk.entity.*
 import cn.entertech.affectivecloudsdk.interfaces.*
@@ -171,33 +171,33 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
     }
 
     private fun selectAvailableAffectiveServicesInRemote(subData: SubAffectiveDataFields) {
-        var affectiveDataCategories = mutableListOf<AffectiveDataCategory>()
+        var affectiveDataCategories = mutableListOf<PhysiologyDataCategory>()
         if (subData.subAttentionFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.ATTENTION)
+            affectiveDataCategories.add(PhysiologyDataCategory.ATTENTION)
         }
         if (subData.subRelaxationFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.RELAXATION)
+            affectiveDataCategories.add(PhysiologyDataCategory.RELAXATION)
         }
         if (subData.subPressureFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.PRESSURE)
+            affectiveDataCategories.add(PhysiologyDataCategory.PRESSURE)
         }
         if (subData.subPleasureFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.PLEASURE)
+            affectiveDataCategories.add(PhysiologyDataCategory.PLEASURE)
         }
         if (subData.subArousalFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.AROUSAL)
+            affectiveDataCategories.add(PhysiologyDataCategory.AROUSAL)
         }
         if (subData.subSleepFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.SLEEP)
+            affectiveDataCategories.add(PhysiologyDataCategory.SLEEP)
         }
         if (subData.subCoherenceFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.COHERENCE)
+            affectiveDataCategories.add(PhysiologyDataCategory.COHERENCE)
         }
         if (subData.subFlowFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.FLOW)
+            affectiveDataCategories.add(PhysiologyDataCategory.FLOW)
         }
         if (subData.subSsvepMultiClassifyFields != null) {
-            affectiveDataCategories.add(AffectiveDataCategory.SSVEP_MULTI_CLASSIFY)
+            affectiveDataCategories.add(PhysiologyDataCategory.SSVEP_MULTI_CLASSIFY)
         }
         config.availableAffectiveDataCategories = affectiveDataCategories
     }
