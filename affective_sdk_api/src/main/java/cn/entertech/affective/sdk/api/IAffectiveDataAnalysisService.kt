@@ -138,6 +138,8 @@ interface IAffectiveDataAnalysisService {
                                  callback: Callback,
     )
 
+    fun isGoodQuality(quality: Double):Boolean
+
     /**
      * 发送数据
      * */
