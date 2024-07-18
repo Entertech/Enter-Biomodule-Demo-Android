@@ -53,13 +53,13 @@ interface IAffectiveDataAnalysisService {
     fun hasConnectAffectiveService(): Boolean
 
     fun addServiceConnectStatueListener(
-        connectionListener: () -> Unit,
-        disconnectListener: (String) -> Unit
+        connectionListener: (() -> Unit)? = null,
+        disconnectListener: ((String) -> Unit)? = null
     )
 
     fun removeServiceConnectStatueListener(
-        connectionListener: () -> Unit,
-        disconnectListener: (String) -> Unit
+        connectionListener: (() -> Unit)? = null,
+        disconnectListener: ((String) -> Unit)? = null
     )
 
     /**

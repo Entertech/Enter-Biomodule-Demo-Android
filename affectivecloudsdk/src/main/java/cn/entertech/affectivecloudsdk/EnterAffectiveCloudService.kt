@@ -192,19 +192,27 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
     }
 
     override fun addServiceConnectStatueListener(
-        connectionListener: () -> Unit,
-        disconnectListener: (String) -> Unit
+        connectionListener: (() -> Unit)?,
+        disconnectListener: ((String) -> Unit)?
     ) {
-        mEnterAffectiveCloudManager?.addWebSocketConnectListener(connectionListener)
-        mEnterAffectiveCloudManager?.addWebSocketDisconnectListener(disconnectListener)
+        connectionListener?.apply {
+            mEnterAffectiveCloudManager?.addWebSocketConnectListener(this)
+        }
+        disconnectListener?.apply {
+            mEnterAffectiveCloudManager?.addWebSocketDisconnectListener(this)
+        }
     }
 
     override fun removeServiceConnectStatueListener(
-        connectionListener: () -> Unit,
-        disconnectListener: (String) -> Unit
+        connectionListener: (() -> Unit)?,
+        disconnectListener: ((String) -> Unit)?
     ) {
-        mEnterAffectiveCloudManager?.removeWebSocketConnectListener(connectionListener)
-        mEnterAffectiveCloudManager?.removeWebSocketDisconnectListener(disconnectListener)
+        connectionListener?.apply {
+            mEnterAffectiveCloudManager?.removeWebSocketConnectListener(this)
+        }
+        disconnectListener?.apply {
+            mEnterAffectiveCloudManager?.removeWebSocketDisconnectListener(this)
+        }
     }
 
     override fun hasStartAffectiveService(): Boolean {
