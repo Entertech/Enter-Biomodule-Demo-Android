@@ -399,7 +399,6 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
             )
         } else {
             listener.finishAffectiveFail(Error(-1, "affective is null"))
-            listener.finishSuccess()
         }
     }
 

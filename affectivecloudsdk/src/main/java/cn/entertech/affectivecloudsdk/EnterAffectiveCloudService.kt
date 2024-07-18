@@ -237,6 +237,16 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
                             listener.onSuccess(null)
                             return
                         }
+                        mEnterAffectiveCloudManager?.release(object :
+                            IFinishAffectiveServiceListener {
+                            override fun finishError(error: Error?) {
+                                listener.onSuccess(null)
+                            }
+
+                            override fun finishSuccess() {
+                                listener.onSuccess(null)
+                            }
+                        })
                     }
                 })
             }
@@ -257,6 +267,17 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
                             listener.onSuccess(null)
                             return
                         }
+
+                        mEnterAffectiveCloudManager?.release(object :
+                            IFinishAffectiveServiceListener {
+                            override fun finishError(error: Error?) {
+                                listener.onSuccess(null)
+                            }
+
+                            override fun finishSuccess() {
+                                listener.onSuccess(null)
+                            }
+                        })
                     }
                 })
             }
