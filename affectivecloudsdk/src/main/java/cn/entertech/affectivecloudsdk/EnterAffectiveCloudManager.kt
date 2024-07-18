@@ -38,6 +38,8 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
     private var mAffectiveRealtimeListener =
         CopyOnWriteArrayList<(RealtimeAffectiveData?) -> Unit>()
     private var disconnectListeners = CopyOnWriteArrayList<(String) -> Unit>()
+
+    @Volatile
     private var isInit = false
 
     /**
@@ -96,7 +98,10 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
                             }
 
                             override fun onError(error: Error?) {
-                                AffectiveLogHelper.e(TAG, "subscribeBioData  response onError $error")
+                                AffectiveLogHelper.e(
+                                    TAG,
+                                    "subscribeBioData  response onError $error"
+                                )
                             }
 
                         },
@@ -107,7 +112,10 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
                             }
 
                             override fun onError(error: Error?) {
-                                AffectiveLogHelper.e(TAG, "subscribeBioData  callback onError $error")
+                                AffectiveLogHelper.e(
+                                    TAG,
+                                    "subscribeBioData  callback onError $error"
+                                )
                             }
 
                         })
@@ -143,23 +151,35 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
                                 }
 
                                 override fun onError(error: Error?) {
-                                    AffectiveLogHelper.e(TAG, "subscribeAffectiveData onError $error ")
+                                    AffectiveLogHelper.e(
+                                        TAG,
+                                        "subscribeAffectiveData onError $error "
+                                    )
                                 }
                             },
                             object : Callback2<SubAffectiveDataFields> {
                                 override fun onSuccess(t: SubAffectiveDataFields?) {
-                                    AffectiveLogHelper.e(TAG, "subscribeAffectiveData callback onSuccess ")
+                                    AffectiveLogHelper.e(
+                                        TAG,
+                                        "subscribeAffectiveData callback onSuccess "
+                                    )
                                     if (t != null) {
                                         selectAvailableAffectiveServicesInRemote(t)
                                     }
                                 }
 
                                 override fun onError(error: Error?) {
-                                    AffectiveLogHelper.e(TAG, "subscribeAffectiveData callback onError $error ")
+                                    AffectiveLogHelper.e(
+                                        TAG,
+                                        "subscribeAffectiveData callback onError $error "
+                                    )
                                 }
                             })
                     } else {
-                        AffectiveLogHelper.e(TAG, "initAffective config.mAffectiveSubscribeParams == null ")
+                        AffectiveLogHelper.e(
+                            TAG,
+                            "initAffective config.mAffectiveSubscribeParams == null "
+                        )
                     }
                 }
 
@@ -197,7 +217,7 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
             affectiveDataCategories.add(PhysiologyDataCategory.FLOW)
         }
         if (subData.subSsvepMultiClassifyFields != null) {
-            affectiveDataCategories.add(PhysiologyDataCategory.SSVEP_MULTI_CLASSIFY)
+//            affectiveDataCategories.add(PhysiologyDataCategory.SSVEP_MULTI_CLASSIFY)
         }
         config.availableAffectiveDataCategories = affectiveDataCategories
     }
@@ -291,34 +311,57 @@ class EnterAffectiveCloudManager(var config: EnterAffectiveCloudConfig) :
     }
 
     override fun appendMCEEGData(mceegData: ByteArray) {
+        if (!isInit) {
+            return
+        }
         mApi.appendMCEEGData(mceegData)
     }
 
     override fun appendPEPRData(peprData: ByteArray) {
+        if (!isInit) {
+            return
+        }
         mApi.appendPEPRData(peprData)
     }
 
     override fun appendBCGData(bcgData: ByteArray, packageCount: Int) {
+        if (!isInit) {
+            return
+        }
         mApi.appendBCGData(bcgData, packageCount)
     }
 
     override fun appendGyroData(gyroData: ByteArray, packageCount: Int) {
+        if (!isInit) {
+            return
+        }
         mApi.appendGyroData(gyroData, packageCount)
     }
 
     override fun appendEEGData(brainData: ByteArray) {
+        if (!isInit) {
+            return
+        }
         mApi.appendEEGData(brainData)
     }
 
     override fun appendDCEEGData(brainData: ByteArray) {
+        if (!isInit) {
+            return
+        }
         mApi.appendDCEEGData(brainData)
     }
 
     override fun appendSCEEGData(brainData: ByteArray) {
-
+        if (!isInit) {
+            return
+        }
     }
 
     override fun appendHeartRateData(heartRateData: Int) {
+        if (!isInit) {
+            return
+        }
         mApi.appendHeartData(heartRateData)
     }
 
