@@ -13,5 +13,11 @@ data class EnterAffectiveConfigProxy(
     val appSecret: String = "",
     val appKey: String = "",
     val age: Int = 0,
-)
+) {
+    companion object {
+        const val SEX_MAN = "m"
+        const val SEX_WOMEN = "f"
+        const val SEX_OTHER = "0"
+    }
+}
 
