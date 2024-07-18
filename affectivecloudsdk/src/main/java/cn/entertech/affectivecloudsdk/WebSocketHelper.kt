@@ -236,6 +236,7 @@ class WebSocketHelper(var address: String, var timeout: Int = 10000) : IWebSocke
     }
 
     fun sendMessage(jsonData: String) {
+        AffectiveLogHelper.d(TAG,"sendMessage: $jsonData")
         rawJsonRequestListeners.forEach {
             it.invoke(jsonData)
         }
@@ -251,10 +252,7 @@ class WebSocketHelper(var address: String, var timeout: Int = 10000) : IWebSocke
     }
 
     override fun isOpen(): Boolean {
-        if (mBrainDataWebSocket == null) {
-            return false
-        }
-        return mBrainDataWebSocket!!.isOpen
+        return mBrainDataWebSocket?.isOpen?:false
     }
 
     override fun close() {

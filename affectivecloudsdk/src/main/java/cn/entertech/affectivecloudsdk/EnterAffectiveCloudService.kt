@@ -181,7 +181,9 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
 
     override fun finishAffectiveService(listener: IFinishAffectiveServiceListener) {
         AffectiveLogHelper.d(TAG, "finishAffectiveService")
-        mEnterAffectiveCloudManager?.release(listener)
+        if (hasConnectAffectiveService()) {
+            mEnterAffectiveCloudManager?.release(listener)
+        }
     }
 
     override fun addServiceConnectStatueListener(
