@@ -643,29 +643,31 @@ class EnterAffectiveCloudApiImpl internal constructor(
 
 
     override fun finishAllAffectiveDataServices(callback: Callback) {
-        if (mStartedAffectiveDataCategories == null) {
+        mStartedAffectiveDataCategories?.apply {
+            finishAffectiveDataServices(this, callback)
+
+        }?: kotlin.run {
             throw IllegalStateException(
                 "there is no affective services started!!"
             )
         }
-        finishAffectiveDataServices(mStartedAffectiveDataCategories!!, callback)
     }
 
     override fun destroySessionAndCloseWebSocket(callback: Callback) {
         this.mWebSocketCloseCallback = callback
-        var requestBody = RequestBody(SERVER_SESSION, "close", null)
-        var requestJson = Gson().toJson(requestBody)
+        val requestBody = RequestBody(SERVER_SESSION, "close", null)
+        val requestJson = Gson().toJson(requestBody)
         mWebSocketHelper?.sendMessage(requestJson)
     }
 
 
     override fun submit(remark: List<RecData>, callback: Callback) {
         this.mSubmitCallback = callback
-        var requestBodyMap = java.util.HashMap<Any, Any>()
+        val requestBodyMap = java.util.HashMap<Any, Any>()
         requestBodyMap["rec"] = remark
-        var requestBody =
+        val requestBody =
             RequestBody(SERVER_BIO_DATA, "submit", requestBodyMap)
-        var requestJson = Gson().toJson(requestBody)
+        val requestJson = Gson().toJson(requestBody)
         mWebSocketHelper?.sendMessage(requestJson)
     }
 
