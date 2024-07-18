@@ -12,7 +12,7 @@ PublishInfo {
 }
 
 android {
-    namespace = "cn.entertech.affective"
+    namespace = "cn.entertech.affectivesdk"
     compileSdk = 33
 
     defaultConfig {
@@ -20,6 +20,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++11 -fexceptions")
+//                cppFlags "-std=c++11 -frtti -fexceptions -Who-format"
+            }
+        }
     }
 
     buildTypes {
@@ -29,6 +36,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path("CMakeLists.txt")
         }
     }
     compileOptions {
