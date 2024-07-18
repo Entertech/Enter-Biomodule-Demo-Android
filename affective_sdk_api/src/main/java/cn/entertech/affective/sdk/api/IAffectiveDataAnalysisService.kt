@@ -104,9 +104,15 @@ interface IAffectiveDataAnalysisService {
      * 检查一次初始化状态
      * @see [hasStartAffectiveService]
      * */
-    fun checkInitStatue(){
+    fun checkInitStatue() {
 
     }
+
+    /**
+     * 检查环境
+     * @return true 表示当前环境可用
+     * */
+    fun checkEnvironment(context: Context): Boolean = true
 
     /**
      * 订阅数据
@@ -131,19 +137,20 @@ interface IAffectiveDataAnalysisService {
      * @param case 数据流读取出来的字符串转成需要的类型R
      * @param appendAllData 处理所有未被消耗的数据
      * */
-    fun <R> readFileAnalysisData(inputStream: InputStream,
-                                 appSingleData: ((R) -> Boolean)? = null,
-                                 appendAllData: (List<R>) -> Unit,
-                                 case: (String) -> R,
-                                 callback: Callback,
+    fun <R> readFileAnalysisData(
+        inputStream: InputStream,
+        appSingleData: ((R) -> Boolean)? = null,
+        appendAllData: (List<R>) -> Unit,
+        case: (String) -> R,
+        callback: Callback,
     )
 
-    fun isGoodQuality(quality: Double):Boolean
+    fun isGoodQuality(quality: Double): Boolean
 
     /**
      * 发送数据
      * */
-    fun appendData(dataType: MeditateDataType, data:ByteArray)
+    fun appendData(dataType: MeditateDataType, data: ByteArray)
 
     fun appendEEGData(brainData: ByteArray)
     fun appendEEGData(brainData: Int)

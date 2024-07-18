@@ -15,6 +15,7 @@ import cn.entertech.affective.sdk.bean.RealtimeBioData
 import java.util.HashMap
 import cn.entertech.affective.sdk.bean.Error
 import cn.entertech.affective.sdk.utils.AffectiveLogHelper
+import cn.entertech.base.net.NetworkUtils
 import cn.entertech.ble.api.bean.MeditateDataType
 import com.google.auto.service.AutoService
 import java.io.InputStream
@@ -70,6 +71,10 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
         mEnterAffectiveCloudManager?.restore(listener) ?: run {
             AffectiveLogHelper.e(TAG, "restoreAffectiveService mEnterAffectiveCloudManager is null")
         }
+    }
+
+    override fun checkEnvironment(context: Context): Boolean {
+        return NetworkUtils.isNetworkConnected(context)
     }
 
     override fun subscribeData(
