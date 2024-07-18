@@ -5,9 +5,8 @@ import cn.entertech.affective.sdk.bean.type.PhysiologyDataCategory
 
 
 data class EnterAffectiveConfigProxy(
-    val availableBiaCategory: List<BioDataCategory> = BioDataCategory.values().toList(),
-    val availableAffectiveCategories: List<PhysiologyDataCategory> = PhysiologyDataCategory.values()
-        .toList(),
+    val availableBiaCategory: List<BioDataCategory> = BioDataCategory.getDefaultList(),
+    val availableAffectiveCategories: List<PhysiologyDataCategory> = PhysiologyDataCategory.getDefaultList(),
     val sex: String = "",
     val userId: String = "",
     val appSecret: String = "",
