@@ -1,5 +1,6 @@
 package cn.entertech.affective.sdk.bean
 
+import cn.entertech.affective.sdk.bean.report.TagData
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -65,19 +66,6 @@ data class Biodata(
     val pepr: PEPR? = null,
     val tag: TagData? = null
 ) : Serializable
-
-data class TagData(
-    val hr_avg: Int = 0,
-    val hr_max: Int = Int.MIN_VALUE,
-    val hr_min: Int = Int.MAX_VALUE,
-    val hr_rec: List<Int> = emptyList(),
-    val hrv_avg: Double = 0.0,
-    val hrv_rec: List<Double> = emptyList(),
-    val rr_avg: Double = 0.0,
-    val rr_rec: List<Double> = emptyList(),
-    val rri_quality_rec: List<Int> = emptyList(),
-) : Serializable
-
 
 data class PEPR(
     @SerializedName("hr_avg")
@@ -159,12 +147,25 @@ data class Sleep(
     var sleepPosition: List<Int> = emptyList(),
 
 
+    /**
+     * sleepSpindle:睡眠抗干扰,[0,100]，值越大表示越容易被干扰
+     * */
     @SerializedName("sleep_spindle")
     var sleepSpindle: Double = 0.0,
 
+    /**
+     * 目前没有用途，传空数据
+     * */
     @SerializedName("sleep_spindle_rec")
     var sleepSpindleRec: List<Double> = ArrayList(),
 
+    /**
+     * WAKE = 0  # 清醒
+     * NREM1 = 1  # 非快速眼动期1（思睡期）
+     * NREM2 = 2  # 非快速眼动期2（浅睡期）
+     * NREM3 = 3  # 非快速眼动期3（深睡期）
+     * REM = 4  # 快速眼动期
+     */
     @SerializedName("sleep_stage")
     var sleepStage: List<Int> = emptyList(),
 
@@ -183,7 +184,7 @@ data class Sleep(
      */
     var arousalCount: Int = 0,
     /**
-     * 容差
+     * 容差 睡眠抗干扰,[0,100] see[sleepSpindle]
      */
     var disturbTolerance: Double = 0.0,
 

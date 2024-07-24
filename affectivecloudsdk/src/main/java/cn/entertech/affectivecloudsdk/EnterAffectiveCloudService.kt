@@ -105,26 +105,6 @@ class EnterAffectiveCloudService : IAffectiveDataAnalysisService {
         }
     }
 
-    override fun appendData(dataType: MeditateDataType, data: ByteArray) {
-        when (dataType) {
-            MeditateDataType.EEG -> {
-                appendEEGData(data)
-            }
-
-            MeditateDataType.SCEEG -> {
-                appendSCEEGData(data)
-            }
-
-            MeditateDataType.PEPR -> {
-                appendPEPRData(data)
-            }
-
-            else -> {
-                throw IllegalAccessError("not support this type $dataType")
-            }
-        }
-    }
-
     override fun <R> readFileAnalysisData(
         inputStream: InputStream,
         appSingleData: ((R) -> Boolean)?,

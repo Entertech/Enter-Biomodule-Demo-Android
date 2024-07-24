@@ -150,7 +150,83 @@ interface IAffectiveDataAnalysisService {
     /**
      * 发送数据
      * */
-    fun appendData(dataType: MeditateDataType, data: ByteArray)
+    @Deprecated("", ReplaceWith("appendByteArrayData(dataType, data)"))
+    fun appendData(dataType: MeditateDataType, data: ByteArray): Boolean {
+        return appendByteArrayData(dataType, data)
+    }
+
+    fun appendByteArrayData(dataType: MeditateDataType, data: ByteArray): Boolean {
+        return when (dataType) {
+            MeditateDataType.EEG -> {
+                appendEEGData(data)
+                true
+            }
+
+            MeditateDataType.SCEEG -> {
+                appendSCEEGData(data)
+                true
+            }
+
+
+            MeditateDataType.PEPR -> {
+                appendPEPRData(data)
+                true
+            }
+
+            else -> {
+                false
+            }
+        }
+    }
+
+    fun appendDoubleData(dataType: MeditateDataType, data: Double): Boolean {
+        return false
+    }
+
+    fun appendIntData(dataType: MeditateDataType, data: Int): Boolean {
+        if (!hasStartAffectiveService()) {
+            return false
+        }
+        when (dataType) {
+            MeditateDataType.EEG -> {
+                appendEEGData(data)
+            }
+
+            MeditateDataType.SCEEG -> {
+                appendSCEEGData(data)
+            }
+
+            MeditateDataType.HEART_RATE -> {
+                appendHeartRateData(data)
+            }
+
+            else -> {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun appendIntListData(dataType: MeditateDataType, data: List<Int>): Boolean {
+        when (dataType) {
+            MeditateDataType.EEG -> {
+                appendEEGData(data)
+            }
+
+            MeditateDataType.SCEEG -> {
+                appendSCEEGData(data)
+            }
+
+            else -> {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun appendFloatData(dataType: MeditateDataType, data: Float): Boolean {
+        return false
+    }
 
     fun appendEEGData(brainData: ByteArray)
     fun appendEEGData(brainData: Int)
