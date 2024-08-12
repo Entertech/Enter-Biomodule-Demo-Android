@@ -6,6 +6,7 @@ import cn.entertech.affective.sdk.bean.EnterAffectiveConfigProxy
 import cn.entertech.affective.sdk.bean.RealtimeAffectiveData
 import cn.entertech.affective.sdk.bean.RealtimeBioData
 import cn.entertech.ble.api.bean.MeditateDataType
+import cn.entertech.device.DeviceType
 import java.io.InputStream
 import java.util.ServiceLoader
 
@@ -146,6 +147,10 @@ interface IAffectiveDataAnalysisService {
     )
 
     fun isGoodQuality(quality: Double): Boolean
+
+    fun appendDevicePosition(device:DeviceType,position:String){
+
+    }
 
     /**
      * 发送数据
