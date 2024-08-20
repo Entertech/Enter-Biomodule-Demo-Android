@@ -3,9 +3,16 @@ package cn.entertech.affective.sdk.bean.report
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class BiodataTimePoints : Serializable{
-    val eeg: List<TimePoint> = ArrayList()
+class BiodataTimePoints() : Serializable {
+    var eeg: List<TimePoint> = ArrayList()
+
     @SerializedName("hr-v2")
-    val hr: List<TimePoint> = ArrayList()
-    val pepr: List<TimePoint> = ArrayList()
+    var hr: List<TimePoint> = ArrayList()
+    var pepr: List<TimePoint> = ArrayList()
+
+    constructor(eeg: List<TimePoint>, hr: List<TimePoint>, pepr: List<TimePoint>) : this() {
+        this.eeg = eeg
+        this.hr = hr
+        this.pepr = pepr
+    }
 }

@@ -5,7 +5,12 @@ import java.io.Serializable
 /**
  * 持续的时间段，可能中途会断开
  * */
-class TimePoint : Serializable {
+class TimePoint() : Serializable {
     var start: String?= null
     var stop: String?= null
+
+    constructor(start: String?, stop: String?) : this() {
+        this.start = start
+        this.stop = stop
+    }
 }
