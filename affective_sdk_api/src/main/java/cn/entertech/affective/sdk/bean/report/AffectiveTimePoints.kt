@@ -10,6 +10,7 @@ class AffectiveTimePoints(): Serializable{
     var pressure: List<TimePoint> = ArrayList()
     var relaxation: List<TimePoint> = ArrayList()
     var meditation: List<TimePoint> = ArrayList()
+    var sleep: List<TimePoint> = ArrayList()
     constructor(
         arousal: List<TimePoint>,
         attention: List<TimePoint>,
@@ -17,7 +18,8 @@ class AffectiveTimePoints(): Serializable{
         pleasure: List<TimePoint>,
         pressure: List<TimePoint>,
         relaxation: List<TimePoint>,
-        meditation: List<TimePoint>
+        meditation: List<TimePoint>,
+        sleep: List<TimePoint>
     ) : this() {
         this.arousal = arousal
         this.attention = attention
@@ -26,6 +28,7 @@ class AffectiveTimePoints(): Serializable{
         this.pressure = pressure
         this.relaxation = relaxation
         this.meditation = meditation
+        this.sleep = sleep
     }
     
 }

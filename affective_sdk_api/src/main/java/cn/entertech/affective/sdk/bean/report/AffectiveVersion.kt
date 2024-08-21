@@ -9,6 +9,7 @@ class AffectiveVersion() : Serializable {
     var pleasure: String? = null
     var pressure: String? = null
     var relaxation: String? = null
+    var meditation: String? = null
 
     constructor(
         arousal: String?,
@@ -16,7 +17,8 @@ class AffectiveVersion() : Serializable {
         coherence: String?,
         pleasure: String?,
         pressure: String?,
-        relaxation: String?
+        relaxation: String?,
+        meditation: String?
     ) : this() {
         this.arousal = arousal
         this.attention = attention
@@ -24,5 +26,6 @@ class AffectiveVersion() : Serializable {
         this.pleasure = pleasure
         this.pressure = pressure
         this.relaxation = relaxation
+        this.meditation = meditation
     }
 }
