@@ -43,6 +43,10 @@ android {
 dependencies {
     api ("com.entertech.android:biomoduleble-api:0.0.3")
     implementation("androidx.core:core-ktx:1.6.0")
+    implementation(fileTree(mapOf(
+        "dir" to "libs",
+        "include" to listOf("*.aar", "*.jar"),
+    )))
     testImplementation("junit:junit:4.13.2")
     implementation("com.google.code.gson:gson:2.8.5")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,14 +1,23 @@
 package cn.entertech.affective.sdk.bean.report
 
-import cn.entertech.affective.sdk.bean.report.Affective
-import cn.entertech.affective.sdk.bean.report.Biodata
+import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.table.DatabaseTable
 import java.io.Serializable
 
-class Data(): Serializable{
-    var affective: Affective?=null
-    var biodata: Biodata?=null
+@DatabaseTable(tableName = "report_detail_data")
+class Data() : Serializable {
 
-    constructor(affective: Affective?, biodata: Biodata?):this(){
+    @Transient
+    @DatabaseField(id = true)
+    var dataId:Int=0
+
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true)
+    var affective: Affective? = null
+
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true)
+    var biodata: Biodata? = null
+
+    constructor(affective: Affective?, biodata: Biodata?) : this() {
         this.affective = affective
         this.biodata = biodata
     }
